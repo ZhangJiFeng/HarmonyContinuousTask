@@ -96,6 +96,31 @@ this.session?.setAVPlaybackState(this.currentState);
 
 ---
 
+## 权限
+1.长时任务权限ohos.permission.KEEP_BACKGROUND_RUNNING 如果需要让媒体提供方应用在后台运行或响应命令，需要注册长时任务权限[ohos.permission.KEEP_BACKGROUND_RUNNING] 请在需要后台运行的Ability的module.json5中添加以下配置：
+``` typescript
+{
+  "requestPermissions": [
+    {
+      "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+      "reason": "$string:reason_keep_background_running",
+      "usedScene": {
+        "abilities": [
+          "EntryAbility"
+        ],
+        "when": "always"
+      }
+    }
+  ]
+}
+```
+2.ability 新增backgroundModes
+``` typescript
+"backgroundModes": [
+// 长时任务类型的配置项
+  "audioPlayback"
+],
+```
 ## 注意事项
 约束与限制
 申请限制：Stage模型中，长时任务仅支持UIAbility申请；FA模型中，长时任务仅支持ServiceAbility申请。长时任务支持设备当前应用申请，也支持跨设备或跨应用申请，跨设备或跨应用仅对系统应用开放。
